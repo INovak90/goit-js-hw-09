@@ -6,17 +6,21 @@ const refs = {
   stop: document.querySelector('[data-stop]'),
   body: document.querySelector('body'),
 };
+let timerId = null;
+refs.stop.setAttribute('disabled', true);
 refs.start.addEventListener('click', onClickBtnStart);
 refs.stop.addEventListener('click', onClickBtnStop);
 
-function onClickBtnStart(e) {
+function onClickBtnStart() {
   timerId = setInterval(changeBkgWithTimeOut, 1000);
   refs.start.setAttribute('disabled', true);
+  refs.stop.removeAttribute('disabled');
 }
 
-function onClickBtnStop(e) {
+function onClickBtnStop() {
   clearInterval(timerId);
   refs.start.removeAttribute('disabled');
+  refs.stop.setAttribute('disabled', true);
 }
 
 function changeBkgWithTimeOut() {
